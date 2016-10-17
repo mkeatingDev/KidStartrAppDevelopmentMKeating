@@ -44,7 +44,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    //Dingus
     @IBAction func LoginPressed(_ sender: AnyObject) {
         logIn()
     }
