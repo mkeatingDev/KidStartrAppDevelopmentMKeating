@@ -19,6 +19,15 @@ class JoinProjInfo: UIViewController {
     
     @IBOutlet var ProjectMembersTF: UILabel!
     
+    var membersStr = [String]()
+    var members = [MembersObj]()
+    var shouldGoToMembers = false
+    
+    @IBAction func MembersPressed(_ sender: AnyObject) {
+        convertToMembersObj()
+        shouldGoToMembers = true
+    }
+    
     //Variables that are passed from the previous view controllers
     var ProjectName = String()
     var ProjectCreator = String()
@@ -49,12 +58,28 @@ class JoinProjInfo: UIViewController {
                 for object in objects! {
                     let array = (object["Members"] as! String).components(separatedBy: "*")
                     
+                    self.membersStr = array
+                    
                     self.ProjectMembersTF.text = "Members: " + String(array.count - 2)
                 }
             }
             
         }
 
+    }
+    func convertToMembersObj(){
+        members.removeAll()
+        
+        for object in membersStr{
+            members.append(MembersObj(Username: object))
+        }
+        if(members.count > 2){
+            members.remove(at: 0)
+            members.remove(at: members.count - 1)
+
+        }else{
+            members.remove(at: 0)
+        }
     }
     
     @IBAction func RefreshPressed(_ sender: AnyObject) {
@@ -90,6 +115,13 @@ class JoinProjInfo: UIViewController {
             }
         }
 
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(shouldGoToMembers){
+            let viewController: Members = segue.destination as! Members
+            
+            viewController.Members = members
+        }
     }
    
     func Alert(_ t: String, Message: String){

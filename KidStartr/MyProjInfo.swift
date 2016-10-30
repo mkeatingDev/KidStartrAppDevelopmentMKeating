@@ -23,6 +23,39 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var GoalCTF: UILabel!
     @IBOutlet var MembersCTF: UILabel!
     
+    var membersStr = [String]()
+    var members = [MembersObj]()
+    var shouldGoToMembers = false
+    
+    func convertToMembersObj(){
+        members.removeAll()
+        
+        for object in membersStr{
+            members.append(MembersObj(Username: object))
+        }
+        if(members.count > 2){
+            members.remove(at: 0)
+            members.remove(at: members.count - 1)
+            
+        }else{
+            members.remove(at: 0)
+        }
+    }
+    @IBAction func LeaderMembersPressed(_ sender: AnyObject) {
+        convertToMembersObj()
+        shouldGoToMembers = true
+    }
+    @IBAction func MemberMembersPressed(_ sender: AnyObject) {
+        convertToMembersObj()
+        shouldGoToMembers = true
+    }
+    @IBAction func MemberCommentPressed(_ sender: AnyObject) {
+        shouldGoToMembers = false
+    }
+    @IBAction func LeaderCommentPressed(_ sender: AnyObject) {
+        shouldGoToMembers = false
+    }
+    
     var holdName = ""
     
     var Name = String()
@@ -127,7 +160,7 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
                                 }
                                 
                                 var j = 0
-                                //At the last possible moment(To avoid any possible errors later on in runtime) the current members list is erased and set to the default seperator(*)
+                                //At the last possible moment(To avoid any possible errors later on in runtime) the current members list is erased
                                 object["Members"] = ""
                                 //The array is then turned into a string stored in the members string
                                 while(j < array.count - 1){
@@ -262,6 +295,8 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 for object in objects! {
                     let array = (object["Members"] as! String).components(separatedBy: "*")
                     
+                    self.membersStr = array
+                    
                     label.text = "Members: " + String(array.count - 2)
                 }
             }
@@ -270,7 +305,12 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(!gate && !secondGate){
+        if(shouldGoToMembers){
+            let viewController: Members = segue.destination as! Members
+            
+            viewController.Members = members
+        }
+        else if(!gate && !secondGate){
             let viewController: CommentSection = segue.destination as! CommentSection
             
             viewController.comments = comments

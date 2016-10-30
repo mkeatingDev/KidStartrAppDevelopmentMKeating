@@ -17,6 +17,7 @@
 		485F5D3B1D187E20005A6591 /* JoinProjInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F5D3A1D187E20005A6591 /* JoinProjInfo.swift */; };
 		4860E2851D50289700D46277 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4860E2841D50289700D46277 /* Comment.swift */; };
 		4860E2871D50F6F400D46277 /* CommentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4860E2861D50F6F400D46277 /* CommentSection.swift */; };
+		486B71CF1DC651140024C0DE /* MembersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B71CE1DC651140024C0DE /* MembersCell.swift */; };
 		4887A5491D0F331F00D5CC42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4887A5481D0F331F00D5CC42 /* Assets.xcassets */; };
 		4887A54C1D0F331F00D5CC42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4887A54A1D0F331F00D5CC42 /* LaunchScreen.storyboard */; };
 		4887A5571D0F331F00D5CC42 /* KidStartrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4887A5561D0F331F00D5CC42 /* KidStartrTests.swift */; };
@@ -36,6 +37,8 @@
 		48888FE11D11AECC00391864 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48888FE01D11AECC00391864 /* SystemConfiguration.framework */; };
 		48888FE31D11AEDA00391864 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48888FE21D11AEDA00391864 /* AudioToolbox.framework */; };
 		48EFE7691D3C094A00392554 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EFE7681D3C094A00392554 /* InitialViewController.swift */; };
+		48F2DFB51DC1676D006702B4 /* Members.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2DFB41DC1676D006702B4 /* Members.swift */; };
+		48F2DFB71DC167DB006702B4 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2DFB61DC167DB006702B4 /* Member.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,7 @@
 		485F5D3A1D187E20005A6591 /* JoinProjInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinProjInfo.swift; sourceTree = "<group>"; };
 		4860E2841D50289700D46277 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		4860E2861D50F6F400D46277 /* CommentSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentSection.swift; sourceTree = "<group>"; };
+		486B71CE1DC651140024C0DE /* MembersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersCell.swift; sourceTree = "<group>"; };
 		4887A53E1D0F331E00D5CC42 /* KidStartr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidStartr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4887A5481D0F331F00D5CC42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4887A54B1D0F331F00D5CC42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,6 +95,8 @@
 		48888FE01D11AECC00391864 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		48888FE21D11AEDA00391864 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		48EFE7681D3C094A00392554 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		48F2DFB41DC1676D006702B4 /* Members.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Members.swift; sourceTree = "<group>"; };
+		48F2DFB61DC167DB006702B4 /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,9 @@
 				4860E2841D50289700D46277 /* Comment.swift */,
 				4860E2861D50F6F400D46277 /* CommentSection.swift */,
 				48018B1D1D527ED6002BDFB0 /* CommentCell.swift */,
+				48F2DFB41DC1676D006702B4 /* Members.swift */,
+				48F2DFB61DC167DB006702B4 /* Member.swift */,
+				486B71CE1DC651140024C0DE /* MembersCell.swift */,
 			);
 			name = MyProjects;
 			sourceTree = "<group>";
@@ -376,12 +385,14 @@
 				48EFE7691D3C094A00392554 /* InitialViewController.swift in Sources */,
 				4887A57E1D0F338000D5CC42 /* Profile.swift in Sources */,
 				4887A5741D0F336600D5CC42 /* Projects.swift in Sources */,
+				486B71CF1DC651140024C0DE /* MembersCell.swift in Sources */,
 				4887A5781D0F337100D5CC42 /* MyProjects.swift in Sources */,
 				485F5D3B1D187E20005A6591 /* JoinProjInfo.swift in Sources */,
 				4808BF851D5A784A004173C1 /* CommentViewCell.swift in Sources */,
 				4887A5701D0F335B00D5CC42 /* AppDelegate.swift in Sources */,
 				4860E2871D50F6F400D46277 /* CommentSection.swift in Sources */,
 				485F5D351D1845D6005A6591 /* StartAProject.swift in Sources */,
+				48F2DFB51DC1676D006702B4 /* Members.swift in Sources */,
 				48018B1E1D527ED6002BDFB0 /* CommentCell.swift in Sources */,
 				485F5D311D13380D005A6591 /* ProfileStand.swift in Sources */,
 				48349B1E1D1D78170038CA6D /* MyProjInfo.swift in Sources */,
@@ -390,6 +401,7 @@
 				4887A57A1D0F337600D5CC42 /* JoinAProject.swift in Sources */,
 				485F5D391D1876BC005A6591 /* JoinCell.swift in Sources */,
 				485F5D371D187389005A6591 /* ProjectsCell.swift in Sources */,
+				48F2DFB71DC167DB006702B4 /* Member.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

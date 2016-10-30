@@ -24,7 +24,6 @@ class MyProjects: UITableViewController {
     
     func refresh(_ sender:AnyObject)
     {
-        
         loadData()
         
         self.refreshControl?.endRefreshing()
