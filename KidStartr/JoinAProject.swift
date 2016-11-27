@@ -32,7 +32,7 @@ class JoinAProject: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        Projects.append(ProjectsObj(Name: "Loading...", Creator: "", Desc: "", Goal: ""))
+        Projects.append(ProjectsObj(Name: "Loading...", Creator: "", Desc: "", Goal: "", Location: ""))
         
         loadData()
         
@@ -67,7 +67,7 @@ class JoinAProject: UITableViewController {
                 var StoreArray = [ProjectsObj]()
                 
                 for object in objects! {
-                    let foo = ProjectsObj(Name: object["Name"] as! String, Creator: object["Creator"] as! String, Desc: object["Disc"] as! String, Goal: object["Goal"] as! String)
+                    let foo = ProjectsObj(Name: object["Name"] as! String, Creator: object["Creator"] as! String, Desc: object["Disc"] as! String, Goal: object["Goal"] as! String, Location: ((object["City"] as! String) + "," + (object["State"] as! String)))
                     StoreArray.append(foo)
                     
                 }
@@ -76,7 +76,6 @@ class JoinAProject: UITableViewController {
                     self.tableView.reloadData()
                 })
             }else{
-                print(error)
             }
         }
     }

@@ -36,9 +36,6 @@ class Signup: UIViewController, UITextFieldDelegate {
         user.username = UsernameTF.text
         user.password = PasswordTF.text
         user["Name"] = UsernameTF.text
-        user["FavAnimal"] = ""
-        user["FavFood"] = ""
-        user["FavSubject"] = ""
         
         user.signUpInBackground {
             (succeeded: Bool, error: Error?) -> Void in
@@ -47,7 +44,21 @@ class Signup: UIViewController, UITextFieldDelegate {
                 self.Alert("Error", Message: error.localizedDescription)
             } else {
                 // Yeats it was a success
-                self.performSegue(withIdentifier: "SignUpToLogin", sender: nil)
+                //Create a user object for reference and changing stuff
+                let object = PFObject(className: "UserCopy")
+                object["Name"] = self.UsernameTF.text
+                object["Password"] = self.PasswordTF.text
+                object["Username"] = self.UsernameTF.text
+                
+                object.saveInBackground { (success, error) -> Void in
+                    if error == nil{
+                        self.performSegue(withIdentifier: "SignUpToLogin", sender: nil)
+                    }else{
+                        self.Alert("An error occured", Message: "")
+                    }
+                }
+                
+                
             }
         }
     }

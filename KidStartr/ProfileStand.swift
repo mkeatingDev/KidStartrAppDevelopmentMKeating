@@ -11,45 +11,43 @@ import Parse
 
 class ProfileStand: UIViewController {
 
+    @IBOutlet var ProfilePicture: UIImageView!
+    
     @IBOutlet var NameTF: UILabel!
     @IBOutlet var UsernameTF: UILabel!
     
-    @IBOutlet var FavAnimalTF: UILabel!
-    @IBOutlet var FavFoodTF: UILabel!
-    @IBOutlet var FavSubjectTF: UILabel!
-    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    override func viewDidAppear(_ animated: Bool) {
+        
         if PFUser.current() != nil {
             let user = PFUser.current()
             
-           NameTF.text = user?["Name"] as? String
-            UsernameTF.text = "Username: " + (user?.username)!
+            self.UsernameTF.text = user?.username
             
-            if(user?["FavAnimal"] as? String == ""){
-                FavAnimalTF.text = "(None)"
-            }else{
-                FavAnimalTF.text = user?["FavAnimal"] as? String
-
-            }
-            if(user?["FavFood"] as? String == ""){
-                FavFoodTF.text = "(None)"
-            }else{
-                FavFoodTF.text = user?["FavFood"] as? String
-                
-            }
-            if(user?["FavSubject"] as? String == ""){
-                FavSubjectTF.text = "(None)"
-            }else{
-                FavSubjectTF.text = user?["FavSubject"] as? String
-                
-            }
+            //self.ProfilePicture.layer.cornerRadius = self.ProfilePicture.frame.size.width / 2
+            //self.ProfilePicture.clipsToBounds = true
             
+            queryInfo(user: (user?.username)!)
         }else{
             //Never should be triggered
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        let user = PFUser.current()
+        self.UsernameTF.text = user?.username
+        queryInfo(user: (user?.username)!)
+    }
+    func queryInfo(user: String){
+        let query = PFQuery(className:"UserCopy")
+        query.whereKey("Username", equalTo: user)
+        query.findObjectsInBackground {
+            (objects: [PFObject]?, error: Error?) -> Void in
+            if error == nil {
+                for object in objects!{
+                    self.NameTF.text = object["Name"] as! String?
+                }
+            }
         }
     }
     override func didReceiveMemoryWarning() {

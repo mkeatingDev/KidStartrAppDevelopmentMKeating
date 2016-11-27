@@ -16,12 +16,14 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var DescTF: UILabel!
     @IBOutlet var GoalTF: UILabel!
     @IBOutlet var MembersTF: UILabel!
+    @IBOutlet var LocationTF: UILabel!
     
     @IBOutlet var NameCTF: UILabel!
     @IBOutlet var CreatorCTF: UILabel!
     @IBOutlet var DescCTF: UILabel!
     @IBOutlet var GoalCTF: UILabel!
     @IBOutlet var MembersCTF: UILabel!
+    @IBOutlet var LocationCTF: UILabel!
     
     var membersStr = [String]()
     var members = [MembersObj]()
@@ -62,6 +64,7 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var Creator = String()
     var Desc = String()
     var Goal = String()
+    var Location = String()
     
     var comments = [Comment]()
     
@@ -103,6 +106,7 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
             CreatorTF.text = "Creator: " + Creator
             DescTF.text = Desc
             GoalTF.text = "Goal: " + Goal
+            LocationTF.text = Location
             
         }else{
             
@@ -110,6 +114,7 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
             CreatorCTF.text = "Creator: " + Creator
             DescCTF.text = Desc
             GoalCTF.text = "Goal: " + Goal
+            LocationCTF.text = Location
             
         }
     }
@@ -128,61 +133,72 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     @IBAction func LeaveProjectPressed(_ sender: AnyObject) {
         
-        let q = PFQuery(className:"Project")
-        q.whereKey("Name", equalTo: Name)
-        q.whereKey("Creator", equalTo: Creator)
-        q.whereKey("Members", contains: PFUser.current()?.username)
-        q.findObjectsInBackground {
-            (objects: [PFObject]?, error: Error?) -> Void in
-            if error == nil {
-                
-                if objects?.isEmpty == false{
+        //Add an extra option to pull out of the leave
+        let refreshAlert = UIAlertController(title: "Leave?", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            
+            let q = PFQuery(className:"Project")
+            q.whereKey("Name", equalTo: self.Name)
+            q.whereKey("Creator", equalTo: self.Creator)
+            q.whereKey("Members", contains: PFUser.current()?.username)
+            q.findObjectsInBackground {
+                (objects: [PFObject]?, error: Error?) -> Void in
+                if error == nil {
                     
-                    let query = PFQuery(className:"Project")
-                    query.whereKey("Name", equalTo: self.Name)
-                    query.whereKey("Creator", equalTo: self.Creator)
-                    query.findObjectsInBackground {
-                        (objects: [PFObject]?, error: Error?) -> Void in
-                        if error == nil {
-                            
-                            for object in objects! {
+                    if objects?.isEmpty == false{
+                        
+                        let query = PFQuery(className:"Project")
+                        query.whereKey("Name", equalTo: self.Name)
+                        query.whereKey("Creator", equalTo: self.Creator)
+                        query.findObjectsInBackground {
+                            (objects: [PFObject]?, error: Error?) -> Void in
+                            if error == nil {
                                 
-                                //makes an array which stores all the users in the members catigory
-                                var array = (object["Members"] as AnyObject).components(separatedBy: "*")
-                                
-                                var i = 0
-                                //iterates through the array and finds where the user is and removes the user from the array
-                                while(i < array.count){
-                                    if(array[i] == PFUser.current()?.username){
-                                        array.remove(at: i)
+                                for object in objects! {
+                                    
+                                    //makes an array which stores all the users in the members catigory
+                                    var array = (object["Members"] as AnyObject).components(separatedBy: "*")
+                                    
+                                    var i = 0
+                                    //iterates through the array and finds where the user is and removes the user from the array
+                                    while(i < array.count){
+                                        if(array[i] == PFUser.current()?.username){
+                                            array.remove(at: i)
+                                        }
+                                        i = i + 1
                                     }
-                                    i = i + 1
+                                    
+                                    var j = 0
+                                    //At the last possible moment(To avoid any possible errors later on in runtime) the current members list is erased
+                                    object["Members"] = ""
+                                    //The array is then turned into a string stored in the members string
+                                    while(j < array.count - 1){
+                                        object["Members"] = object["Members"] as! String + array[j] + "*"
+                                        j = j + 1
+                                    }
+                                    //The object is saved with the new members string
+                                    object.saveInBackground()
+                                    
+                                    self.gate = true
+                                    self.performSegue(withIdentifier: "segue", sender: nil)
                                 }
                                 
-                                var j = 0
-                                //At the last possible moment(To avoid any possible errors later on in runtime) the current members list is erased
-                                object["Members"] = ""
-                                //The array is then turned into a string stored in the members string
-                                while(j < array.count - 1){
-                                    object["Members"] = object["Members"] as! String + array[j] + "*"
-                                    j = j + 1
-                                }
-                                //The object is saved with the new members string
-                                object.saveInBackground()
-                                
-                                self.gate = true
-                                self.performSegue(withIdentifier: "segue", sender: nil)
+                            }else{
+                                self.Alert("Error", Message: "Project does not exist anymore")
                             }
-                            
-                        }else{
-                            self.Alert("Error", Message: "Project does not exist anymore")
                         }
+                    }else{
+                        self.Alert("You have already left", Message: "")
                     }
-                }else{
-                    self.Alert("You have already left", Message: "")
                 }
             }
-        }
+            
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in }))
+        
+        present(refreshAlert, animated: true, completion: nil)
     }
     
     
@@ -193,39 +209,51 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func deleteProject(){
         //this method is used if the leader chooses to delete the project
         
-        //first we delete the project itself
-        let query = PFQuery(className: "Project")
-        query.whereKey("Name", equalTo: Name)
-        query.whereKey("Creator", equalTo: Creator)
-        query.findObjectsInBackground {
-            (objects: [PFObject]?, error: Error?) -> Void in
+        //Add an extra option to pull out of the delete
+        let refreshAlert = UIAlertController(title: "Delete?", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
             
-            if error == nil {
+            //first we delete the project itself
+            let query = PFQuery(className: "Project")
+            query.whereKey("Name", equalTo: self.Name)
+            query.whereKey("Creator", equalTo: self.Creator)
+            query.findObjectsInBackground {
+                (objects: [PFObject]?, error: Error?) -> Void in
                 
-                for object in objects! {
-                    //deletes the project
-                    object.deleteInBackground()
+                if error == nil {
+                    
+                    for object in objects! {
+                        //deletes the project
+                        object.deleteInBackground()
+                    }
                 }
             }
-        }
-        
-        //Then we have to remomve all of the comments on the project
-        let query2 = PFQuery(className: "Comment")
-        query2.whereKey("Project", equalTo: holdName)
-        query2.findObjectsInBackground {
-            (objects: [PFObject]?, error: Error?) -> Void in
             
-            if error == nil {
+            //Then we have to remomve all of the comments on the project
+            let query2 = PFQuery(className: "Comment")
+            query2.whereKey("Project", equalTo: self.holdName)
+            query2.findObjectsInBackground {
+                (objects: [PFObject]?, error: Error?) -> Void in
                 
-                for object in objects! {
-                    //deletes the comments
-                    object.deleteInBackground()
+                if error == nil {
+                    
+                    for object in objects! {
+                        //deletes the comments
+                        object.deleteInBackground()
+                    }
                 }
             }
-        }
+            
+            self.secondGate = true
+            self.performSegue(withIdentifier: "segue", sender: nil)
+
+            
+        }))
         
-        self.secondGate = true
-        self.performSegue(withIdentifier: "segue", sender: nil)
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in }))
+        
+        present(refreshAlert, animated: true, completion: nil)
     }
     func Alert(_ t: String, Message: String){
         // create the alert
@@ -306,9 +334,11 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(shouldGoToMembers){
+            shouldGoToMembers = false
             let viewController: Members = segue.destination as! Members
             
             viewController.Members = members
+            viewController.projectName = holdName
         }
         else if(!gate && !secondGate){
             let viewController: CommentSection = segue.destination as! CommentSection

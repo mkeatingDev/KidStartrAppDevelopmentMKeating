@@ -14,6 +14,9 @@ class StartAProject: UIViewController, UITextFieldDelegate {
     @IBOutlet var ProjectNameTF: UITextField!
     @IBOutlet var DiscTF: UITextField!
     @IBOutlet var GoalTF: UITextField!
+    @IBOutlet var CityTF: UITextField!
+    @IBOutlet var StateTF: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +24,14 @@ class StartAProject: UIViewController, UITextFieldDelegate {
         self.ProjectNameTF.delegate = self
         self.DiscTF.delegate = self
         self.GoalTF.delegate = self
+        self.CityTF.delegate = self
+        self.StateTF.delegate = self
         
+        self.addBottomLineToTextField(GoalTF)
         self.addBottomLineToTextField(ProjectNameTF)
         self.addBottomLineToTextField(DiscTF)
-        self.addBottomLineToTextField(GoalTF)
+        self.addBottomLineToTextField(CityTF)
+        self.addBottomLineToTextField(StateTF)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -49,6 +56,8 @@ class StartAProject: UIViewController, UITextFieldDelegate {
         object["Name"] = ProjectNameTF.text
         object["Disc"] = DiscTF.text
         object["Goal"] = GoalTF.text
+        object["City"] = CityTF.text
+        object["State"] = StateTF.text
         object["Creator"] = PFUser.current()?.username
         object["Members"] = "*" + (PFUser.current()?.username)! + "*"
         object.saveInBackground { (success, error) -> Void in

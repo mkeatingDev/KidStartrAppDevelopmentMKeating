@@ -9,65 +9,76 @@
 import UIKit
 import Parse
 
-class Profile: UIViewController, UITextFieldDelegate {
+class Profile: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var NameTextField: UITextField!
+    @IBOutlet var profilePicture: UIImageView!
     
-    @IBOutlet var FavSubjectTF: UITextField!
-    @IBOutlet var FavFoodTF: UITextField!
-    @IBOutlet var FavAnimalTF: UITextField!
+    var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.NameTextField.delegate = self
-        self.FavFoodTF.delegate = self
-        self.FavSubjectTF.delegate = self
-        self.FavAnimalTF.delegate = self
+        
+        self.imagePicker.delegate = self
+        self.imagePicker.allowsEditing = false
+        self.imagePicker.sourceType = .photoLibrary
         
         self.addBottomLineToTextField(NameTextField)
-        self.addBottomLineToTextField(FavFoodTF)
-        self.addBottomLineToTextField(FavSubjectTF)
-        self.addBottomLineToTextField(FavAnimalTF)
+    }
+    
+    
+    @IBAction func PickImagePressed(_ sender: Any) {
+        print("hey!")
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.profilePicture.contentMode = .scaleAspectFit
+            self.profilePicture.image = pickedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func SaveBioPressed(_ sender: AnyObject) {
-        PFUser.current()?["FavAnimal"] = FavAnimalTF.text
-        PFUser.current()?["FavFood"] = FavFoodTF.text
-        PFUser.current()?["FavSubject"] = FavSubjectTF.text
-        
-        PFUser.current()!.saveInBackground {
-            (success: Bool!, error: Error?) -> Void in
-            
-            if (success == false) {
-                
-                self.Alert("Error", Message: (error?.localizedDescription)!)
-                
-            } else {
-                
-                self.Alert("Success", Message: "")
-            }
-        }
-
-    }
     @IBAction func SaveNamePressed(_ sender: AnyObject) {
-        PFUser.current()?["Name"] = NameTextField.text
         
-        PFUser.current()!.saveInBackground {
-            (success: Bool!, error: Error?) -> Void in
-            
-            if (success == false) {
+        let query = PFQuery(className: "UserCopy")
+        
+        let username = PFUser.current()?.username
+        
+        query.whereKey("Username", equalTo: username!)
+        
+        query.findObjectsInBackground {
+            (objects: [PFObject]?, error: Error?) -> Void in
+            if error == nil {
                 
-               // let errorString = error!.userInfo["error"] as? NSString
+                for object in objects!{
+                    object["Name"] = self.NameTextField.text
+                    object.saveInBackground {
+                        (success: Bool!, error: Error?) -> Void in
+                        
+                        if (success == false) {
+                            
+                            self.Alert("Error", Message: (error?.localizedDescription)!)
+                            
+                        } else {
+                            
+                            self.Alert("Success", Message: "")
+                        }
+                    }
+                }
                 
-                self.Alert("Error", Message: "Error")
-                
-            } else {
-                
-                self.Alert("Success", Message: "")
             }
         }
 
@@ -106,5 +117,5 @@ class Profile: UIViewController, UITextFieldDelegate {
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in }))
         
         present(refreshAlert, animated: true, completion: nil)
-        }
+    }
 }

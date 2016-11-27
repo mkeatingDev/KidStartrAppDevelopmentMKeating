@@ -13,4 +13,5 @@ struct ProjectsObj {
     let Creator : String
     let Desc : String
     let Goal : String
+    let Location : String
 }

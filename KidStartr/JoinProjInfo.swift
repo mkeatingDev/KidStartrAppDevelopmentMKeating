@@ -16,6 +16,7 @@ class JoinProjInfo: UIViewController {
 
     @IBOutlet var ProjectDescTF: UILabel!
     @IBOutlet var ProjectGoalTF: UILabel!
+    @IBOutlet var LocationTF: UILabel!
     
     @IBOutlet var ProjectMembersTF: UILabel!
     
@@ -121,6 +122,7 @@ class JoinProjInfo: UIViewController {
             let viewController: Members = segue.destination as! Members
             
             viewController.Members = members
+            viewController.projectName = ProjectName
         }
     }
    

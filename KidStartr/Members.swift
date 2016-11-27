@@ -6,11 +6,17 @@
 //  Copyright © 2016 Matt Keating. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 class Members: UITableViewController {
     
     var Members = [MembersObj]()
+    var projectName = ""
+    
+    var shouldGoToOtherProfile = false
+    
+    var userSelectedName = ""
     
     func refresh(_ sender:AnyObject)
     {
@@ -30,6 +36,31 @@ class Members: UITableViewController {
     }
     func loadData(){
         
+        
+        let query = PFQuery(className: "Project")
+        query.whereKey("Name", equalTo: projectName)
+        query.findObjectsInBackground {
+            (objects: [PFObject]?, error: Error?) -> Void in
+            if error == nil {
+                
+                self.Members.removeAll()
+                
+                for object in objects! {
+                    let array = (object["Members"] as! String).components(separatedBy: "*")
+                    
+                    for thing in array{
+                        self.Members.append(MembersObj(Username: thing))
+                    }
+                    if(self.Members.count > 2){
+                        self.Members.remove(at: 0)
+                        self.Members.remove(at: self.Members.count - 1)
+                        
+                    }else{
+                        self.Members.remove(at: 0)
+                    }
+                }
+            }
+        }
         
         tableView.reloadData()
         
@@ -56,5 +87,21 @@ class Members: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        shouldGoToOtherProfile = true
+        
+        userSelectedName = Members[(indexPath as NSIndexPath).row].Username
+        
+        self.performSegue(withIdentifier: "Profile", sender: nil)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(shouldGoToOtherProfile){
+            shouldGoToOtherProfile = false
+            
+            let viewController: OtherUser = segue.destination as! OtherUser
+            
+            viewController.username = userSelectedName
+        }
     }
 }

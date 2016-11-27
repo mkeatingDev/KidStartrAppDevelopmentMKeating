@@ -17,11 +17,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         self.UsernameTF.delegate = self
         self.PasswordTF.delegate = self
         
         self.addBottomLineToTextField(UsernameTF)
         self.addBottomLineToTextField(PasswordTF)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

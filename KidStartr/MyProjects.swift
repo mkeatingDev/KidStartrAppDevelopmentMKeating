@@ -17,6 +17,7 @@ class MyProjects: UITableViewController {
     var HoldProjectCreator = ""
     var HoldProjectDesc = ""
     var HoldProjectGoal = ""
+    var HoldProjectLocation = ""
     
     var gate = false
     
@@ -31,7 +32,7 @@ class MyProjects: UITableViewController {
     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup after loading the view, typically from a nib.
-        MyProjects.append(ProjectsObj(Name: "Loading...", Creator: "", Desc: "", Goal: ""))
+        MyProjects.append(ProjectsObj(Name: "Loading...", Creator: "", Desc: "", Goal: "", Location: ""))
         
         self.refreshControl?.addTarget(self, action: #selector(JoinAProject.refresh(_:)), for: UIControlEvents.valueChanged)
         
@@ -53,12 +54,12 @@ class MyProjects: UITableViewController {
                 
                 for object in objects! {
                     
-                    let foo = ProjectsObj(Name: object["Name"] as! String, Creator: object["Creator"] as! String, Desc: object["Disc"] as! String, Goal: object["Goal"] as! String)
+                    let foo = ProjectsObj(Name: object["Name"] as! String, Creator: object["Creator"] as! String, Desc: object["Disc"] as! String, Goal: object["Goal"] as! String, Location: ((object["City"] as! String) + ", " + (object["State"] as! String)))
                     StoreArray.append(foo)
                     
                 }
                 if(StoreArray.count == 0){
-                    StoreArray.append(ProjectsObj(Name: "No Projects Yet...", Creator: "Add Projects With Join A Project", Desc: "", Goal: ""))
+                    StoreArray.append(ProjectsObj(Name: "No Projects Yet...", Creator: "Add Projects With Join A Project", Desc: "", Goal: "", Location: ""))
                 }
                 self.MyProjects = StoreArray
                 
@@ -66,7 +67,6 @@ class MyProjects: UITableViewController {
                     self.tableView.reloadData()
                 })
             }else{
-                print(error)
             }
         }
     }
@@ -78,6 +78,7 @@ class MyProjects: UITableViewController {
             viewController.Creator = HoldProjectCreator
             viewController.Desc = HoldProjectDesc
             viewController.Goal = HoldProjectGoal
+            viewController.Location = HoldProjectLocation
             
             gate = false
         }
@@ -123,6 +124,7 @@ class MyProjects: UITableViewController {
             HoldProjectCreator = MyProjects[(indexPath as NSIndexPath).row].Creator
             HoldProjectDesc = MyProjects[(indexPath as NSIndexPath).row].Desc
             HoldProjectGoal = MyProjects[(indexPath as NSIndexPath).row].Goal
+            HoldProjectLocation = MyProjects[(indexPath as NSIndexPath).row].Location
             
             if(HoldProjectCreator == PFUser.current()?.username){
                 self.performSegue(withIdentifier: "Creator", sender: nil)
