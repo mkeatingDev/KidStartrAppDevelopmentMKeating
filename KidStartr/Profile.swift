@@ -30,8 +30,6 @@ class Profile: UIViewController, UITextFieldDelegate, UIImagePickerControllerDel
     
     
     @IBAction func PickImagePressed(_ sender: Any) {
-        print("hey!")
-        
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -64,7 +62,9 @@ class Profile: UIViewController, UITextFieldDelegate, UIImagePickerControllerDel
             if error == nil {
                 
                 for object in objects!{
-                    object["Name"] = self.NameTextField.text
+                    if(self.NameTextField.text != ""){
+                        object["Name"] = self.NameTextField.text
+                    }
                     object.saveInBackground {
                         (success: Bool!, error: Error?) -> Void in
                         

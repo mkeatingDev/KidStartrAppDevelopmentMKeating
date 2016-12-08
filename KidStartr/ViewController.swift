@@ -25,9 +25,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.addBottomLineToTextField(PasswordTF)
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidAppear(_ animated: Bool) {
+        if(PFUser.current() != nil){
+            //user is already logged in
+            self.performSegue(withIdentifier: "loggedIn", sender: nil)
+            
+        }
     }
     func logIn(){
         let username = UsernameTF.text

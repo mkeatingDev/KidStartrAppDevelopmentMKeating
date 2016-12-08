@@ -15,6 +15,7 @@ class ProfileStand: UIViewController {
     
     @IBOutlet var NameTF: UILabel!
     @IBOutlet var UsernameTF: UILabel!
+    @IBOutlet var ProjectsTF: UILabel!
     
     override func viewDidLoad() {
         
@@ -25,18 +26,15 @@ class ProfileStand: UIViewController {
             
             self.UsernameTF.text = user?.username
             
-            //self.ProfilePicture.layer.cornerRadius = self.ProfilePicture.frame.size.width / 2
-            //self.ProfilePicture.clipsToBounds = true
-            
-            queryInfo(user: (user?.username)!)
-        }else{
-            //Never should be triggered
+            self.ProfilePicture.layer.cornerRadius = self.ProfilePicture.frame.size.width / 2
+            self.ProfilePicture.clipsToBounds = true
         }
     }
     override func viewDidAppear(_ animated: Bool) {
         let user = PFUser.current()
         self.UsernameTF.text = user?.username
         queryInfo(user: (user?.username)!)
+        queryProjectInfo(user: (user?.username)!)
     }
     func queryInfo(user: String){
         let query = PFQuery(className:"UserCopy")
@@ -47,6 +45,20 @@ class ProfileStand: UIViewController {
                 for object in objects!{
                     self.NameTF.text = object["Name"] as! String?
                 }
+            }
+        }
+    }
+    func queryProjectInfo(user: String){
+        let query = PFQuery(className: "Project")
+        query.whereKey("Members", contains: "*" + user + "*")
+        query.findObjectsInBackground {
+            (objects: [PFObject]?, error: Error?) -> Void in
+            if error == nil {
+                var count = 0
+                for _ in objects!{
+                    count = count + 1
+                }
+                self.ProjectsTF.text = "Projects: " + String(count)
             }
         }
     }

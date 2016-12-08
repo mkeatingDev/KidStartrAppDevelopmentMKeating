@@ -20,6 +20,7 @@ class JoinAProject: UITableViewController {
     var HoldProjectCreator = ""
     var HoldProjectDesc = ""
     var HoldProjectGoal = ""
+    var HoldProjectLocation = ""
     
     func refresh(_ sender:AnyObject)
     {
@@ -51,6 +52,26 @@ class JoinAProject: UITableViewController {
         FilteredProjects = Projects.filter { Projects in
             return Projects.Name.lowercased().contains(searchText.lowercased())
         }
+        FilteredProjects += Projects.filter{ Projects in
+            return Projects.Location.lowercased().contains(searchText.lowercased())
+        }
+        //Sort through the array and delete any repeated elements
+        for project in FilteredProjects{
+            var i = 0;
+            var u = 0;
+            //i(variable, not me) will count how many of the certain index exists
+            //1 is anticipated, > 1 is bad
+            for project2 in FilteredProjects{
+                u += 1;
+                if(project2.Name == project.Name){
+                    i += 1
+                }
+                if(i > 1){
+                    FilteredProjects.remove(at: u-1)
+                    break
+                }
+            }
+        }
         
         tableView.reloadData()
     }
@@ -67,7 +88,7 @@ class JoinAProject: UITableViewController {
                 var StoreArray = [ProjectsObj]()
                 
                 for object in objects! {
-                    let foo = ProjectsObj(Name: object["Name"] as! String, Creator: object["Creator"] as! String, Desc: object["Disc"] as! String, Goal: object["Goal"] as! String, Location: ((object["City"] as! String) + "," + (object["State"] as! String)))
+                    let foo = ProjectsObj(Name: object["Name"] as! String, Creator: object["Creator"] as! String, Desc: object["Disc"] as! String, Goal: object["Goal"] as! String, Location: ((object["City"] as! String) + ", " + (object["State"] as! String)))
                     StoreArray.append(foo)
                     
                 }
@@ -86,6 +107,7 @@ class JoinAProject: UITableViewController {
         viewController.ProjectCreator = HoldProjectCreator
         viewController.ProjectDesc = HoldProjectDesc
         viewController.projectGoal = HoldProjectGoal
+        viewController.projectLocation = HoldProjectLocation
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -114,7 +136,7 @@ class JoinAProject: UITableViewController {
         if(projects.Creator == ""){
             cell.LeaderTF.text = ""
         }else{
-            cell.LeaderTF.text = "Leader: " + projects.Creator
+            cell.LeaderTF.text = projects.Location
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -129,12 +151,14 @@ class JoinAProject: UITableViewController {
             HoldProjectCreator = FilteredProjects[(indexPath as NSIndexPath).row].Creator
             HoldProjectDesc = FilteredProjects[(indexPath as NSIndexPath).row].Desc
             HoldProjectGoal = FilteredProjects[(indexPath as NSIndexPath).row].Goal
+            HoldProjectLocation = FilteredProjects[(indexPath as NSIndexPath).row].Location
             self.performSegue(withIdentifier: "Join", sender: nil)
         }else{
             HoldProjectName = Projects[(indexPath as NSIndexPath).row].Name
             HoldProjectCreator = Projects[(indexPath as NSIndexPath).row].Creator
             HoldProjectDesc = Projects[(indexPath as NSIndexPath).row].Desc
             HoldProjectGoal = Projects[(indexPath as NSIndexPath).row].Goal
+            HoldProjectLocation = Projects[(indexPath as NSIndexPath).row].Location
             self.performSegue(withIdentifier: "Join", sender: nil)
         }
        

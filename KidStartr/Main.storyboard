@@ -451,8 +451,8 @@
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jq5-Bl-aQQ">
-                                <rect key="frame" x="20" y="124" width="560" height="419"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jq5-Bl-aQQ">
+                                <rect key="frame" x="20" y="80" width="560" height="512"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="85" id="Xkc-X2-ErJ" customClass="CommentCell" customModule="KidStartr" customModuleProvider="target">
@@ -542,7 +542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RkD-i0-Dmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3575" y="-1710"/>
+            <point key="canvasLocation" x="3574.4000000000001" y="-1710.0449775112445"/>
         </scene>
         <!--My    Projects-->
         <scene sceneID="ZEA-x4-hCu">
@@ -771,7 +771,7 @@
                                 <rect key="frame" x="20" y="393" width="560" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.42433181819999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="29"/>
-                                <state key="normal" title="Camera">
+                                <state key="normal" title="Photo Library">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1358,6 +1358,7 @@
                     <connections>
                         <outlet property="NameTF" destination="MKU-9t-pVg" id="iA1-aV-ShW"/>
                         <outlet property="ProfilePicture" destination="ocq-a8-kK1" id="FDg-ce-zlN"/>
+                        <outlet property="ProjectsTF" destination="tWG-D8-cgO" id="Ubu-DF-ivO"/>
                         <outlet property="UsernameTF" destination="9Mb-Am-4gv" id="WJ4-NL-Dnf"/>
                     </connections>
                 </viewController>
@@ -1755,8 +1756,8 @@
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CrG-pZ-lVK">
-                                <rect key="frame" x="20" y="124" width="560" height="419"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CrG-pZ-lVK">
+                                <rect key="frame" x="20" y="80" width="560" height="512"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="85" id="vVu-qB-sgn" customClass="CommentCell" customModule="KidStartr" customModuleProvider="target">
@@ -1846,7 +1847,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuH-XV-ZSB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4682" y="-1710"/>
+            <point key="canvasLocation" x="4681.6000000000004" y="-1710.0449775112445"/>
         </scene>
         <!--Profile-->
         <scene sceneID="8E7-cf-8Yu">

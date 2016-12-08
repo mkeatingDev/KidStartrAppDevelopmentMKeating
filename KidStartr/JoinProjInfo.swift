@@ -34,6 +34,7 @@ class JoinProjInfo: UIViewController {
     var ProjectCreator = String()
     var ProjectDesc = String()
     var projectGoal = String()
+    var projectLocation = String()
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -42,6 +43,7 @@ class JoinProjInfo: UIViewController {
         ProjectCreatorTF.text = "Creator: " + ProjectCreator
         ProjectDescTF.text = ProjectDesc
         ProjectGoalTF.text = "Goal: " + projectGoal
+        LocationTF.text = projectLocation
         
         retrieveMembers()
     }

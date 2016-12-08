@@ -24,11 +24,13 @@ class OtherUser: UIViewController{
         
         super.viewDidLoad()
         
-        //self.ProfilePicture.layer.cornerRadius = self.ProfilePicture.frame.size.width / 2
-        //self.ProfilePicture.clipsToBounds = true
+        self.ProfilePicture.layer.cornerRadius = self.ProfilePicture.frame.size.width / 2
+        self.ProfilePicture.clipsToBounds = true
         
         self.UsernameTF.text = username
+        
         retrieveInfo()
+        retrieveProjectInfo()
     }
     func retrieveInfo(){
         let query = PFQuery(className:"UserCopy")
@@ -41,6 +43,9 @@ class OtherUser: UIViewController{
                 }
             }
         }
+        
+    }
+    func retrieveProjectInfo(){
         let query2 = PFQuery(className: "Project")
         query2.whereKey("Members", contains: "*" + username + "*")
         query2.findObjectsInBackground {

@@ -23,8 +23,6 @@ class InitialViewController: UIViewController {
             //user is already logged in
             self.performSegue(withIdentifier: "loggedIn", sender: nil)
 
-        }else{
-            //do nothing
         }
     }
     func editButtons(_ button: UIButton){
