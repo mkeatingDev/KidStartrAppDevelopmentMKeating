@@ -17,6 +17,14 @@ class ProfileStand: UIViewController {
     @IBOutlet var UsernameTF: UILabel!
     @IBOutlet var ProjectsTF: UILabel!
     
+    var shouldGoToProjects = false
+    
+    var storeProjects = [ProjectsObj]()
+    
+    @IBAction func ProjectsPressed(_ sender: Any) {
+        shouldGoToProjects = true
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -28,6 +36,7 @@ class ProfileStand: UIViewController {
             
             self.ProfilePicture.layer.cornerRadius = self.ProfilePicture.frame.size.width / 2
             self.ProfilePicture.clipsToBounds = true
+            self.ProfilePicture.layer.borderWidth = 3
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -44,6 +53,16 @@ class ProfileStand: UIViewController {
             if error == nil {
                 for object in objects!{
                     self.NameTF.text = object["Name"] as! String?
+                    if(object["Picture"] != nil){
+                        let userImageFile = object["Picture"] as! PFFile
+                        userImageFile.getDataInBackground {
+                            (imageData: Data?, error: Error?) -> Void in
+                            if error == nil {
+                                let image = UIImage(data:imageData!)
+                                self.ProfilePicture.image = image
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -55,11 +74,30 @@ class ProfileStand: UIViewController {
             (objects: [PFObject]?, error: Error?) -> Void in
             if error == nil {
                 var count = 0
-                for _ in objects!{
+                //Delete all projets in storeProjects first -.-
+                self.storeProjects.removeAll()
+                
+                for project in objects!{
+                    self.storeProjects.append(ProjectsObj(Name: project["Name"] as! String, Creator: project["Creator"] as! String, Desc: project["Disc"] as! String, Goal: project["Goal"] as! String, Location: (project["City"] as! String) + ", " + (project["State"] as! String)))
                     count = count + 1
                 }
                 self.ProjectsTF.text = "Projects: " + String(count)
             }
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(!shouldGoToProjects){
+            let viewController: Profile = segue.destination as! Profile
+            if(ProfilePicture.image != nil){
+                viewController.image = ProfilePicture.image!
+                viewController.shouldDisplayImage = true
+            }
+        }
+        if(shouldGoToProjects){
+            let viewController: ProjectView = segue.destination as! ProjectView
+            
+            viewController.Projects = storeProjects
         }
     }
     override func didReceiveMemoryWarning() {

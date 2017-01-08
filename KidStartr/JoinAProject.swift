@@ -88,9 +88,7 @@ class JoinAProject: UITableViewController {
                 var StoreArray = [ProjectsObj]()
                 
                 for object in objects! {
-                    let foo = ProjectsObj(Name: object["Name"] as! String, Creator: object["Creator"] as! String, Desc: object["Disc"] as! String, Goal: object["Goal"] as! String, Location: ((object["City"] as! String) + ", " + (object["State"] as! String)))
-                    StoreArray.append(foo)
-                    
+                    StoreArray.append(ProjectsObj(Name: object["Name"] as! String, Creator: object["Creator"] as! String, Desc: object["Disc"] as! String, Goal: object["Goal"] as! String, Location: ((object["City"] as! String) + ", " + (object["State"] as! String))))
                 }
                 self.Projects = StoreArray
                 DispatchQueue.main.async(execute: { () -> Void in

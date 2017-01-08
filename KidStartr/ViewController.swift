@@ -28,7 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         if(PFUser.current() != nil){
             //user is already logged in
-            self.performSegue(withIdentifier: "loggedIn", sender: nil)
+            self.performSegue(withIdentifier: "LoginToTabController", sender: nil)
             
         }
     }

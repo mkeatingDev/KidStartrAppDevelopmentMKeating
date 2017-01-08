@@ -16,6 +16,11 @@ class Profile: UIViewController, UITextFieldDelegate, UIImagePickerControllerDel
     
     var imagePicker = UIImagePickerController()
     
+    @IBOutlet var SaveButtonT: UIButton!
+    
+    var image = UIImage()
+    var shouldDisplayImage = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -25,11 +30,13 @@ class Profile: UIViewController, UITextFieldDelegate, UIImagePickerControllerDel
         self.imagePicker.allowsEditing = false
         self.imagePicker.sourceType = .photoLibrary
         
+        if(shouldDisplayImage){
+            profilePicture.image = image
+        }
+        
         self.addBottomLineToTextField(NameTextField)
     }
-    
-    
-    @IBAction func PickImagePressed(_ sender: Any) {
+    @IBAction func PickImage(_ sender: Any) {
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -41,7 +48,6 @@ class Profile: UIViewController, UITextFieldDelegate, UIImagePickerControllerDel
         
         dismiss(animated: true, completion: nil)
     }
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
@@ -51,9 +57,13 @@ class Profile: UIViewController, UITextFieldDelegate, UIImagePickerControllerDel
     }
     @IBAction func SaveNamePressed(_ sender: AnyObject) {
         
+        SaveButtonT.titleLabel?.text = "Saving..."
         let query = PFQuery(className: "UserCopy")
         
         let username = PFUser.current()?.username
+        
+        let imageData = UIImageJPEGRepresentation(profilePicture.image!, 0.5)
+        let imageFile:PFFile = PFFile(data: imageData!)!
         
         query.whereKey("Username", equalTo: username!)
         
@@ -65,6 +75,8 @@ class Profile: UIViewController, UITextFieldDelegate, UIImagePickerControllerDel
                     if(self.NameTextField.text != ""){
                         object["Name"] = self.NameTextField.text
                     }
+                    object["Picture"] = imageFile
+                    
                     object.saveInBackground {
                         (success: Bool!, error: Error?) -> Void in
                         

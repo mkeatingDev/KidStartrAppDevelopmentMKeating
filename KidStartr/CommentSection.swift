@@ -37,6 +37,7 @@ class CommentSection: UIViewController, UITextFieldDelegate, UITableViewDataSour
         CommentEdit.delegate = self
         
         editButtons(SendButton)
+        addBottomLineToTextField(CommentEdit)
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -131,6 +132,15 @@ class CommentSection: UIViewController, UITextFieldDelegate, UITableViewDataSour
     {
         textField.resignFirstResponder()
         return true
+    }
+    func addBottomLineToTextField(_ textField : UITextField) {
+        let border = CALayer()
+        let borderWidth = CGFloat(1.0)
+        border.borderColor = UIColor.gray.cgColor
+        border.frame = CGRect(x: 0, y: textField.frame.size.height - borderWidth, width: textField.frame.size.width, height: textField.frame.size.height)
+        border.borderWidth = borderWidth
+        textField.layer.addSublayer(border)
+        textField.layer.masksToBounds = true
     }
     func editButtons(_ button: UIButton){
         button.layer.borderWidth = 1.0

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		48018B1E1D527ED6002BDFB0 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48018B1D1D527ED6002BDFB0 /* CommentCell.swift */; };
 		4808BF851D5A784A004173C1 /* CommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4808BF841D5A784A004173C1 /* CommentViewCell.swift */; };
+		482836301E19AA2400A7E2EC /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828362F1E19AA2400A7E2EC /* ProjectView.swift */; };
+		482836341E1AC62800A7E2EC /* ProjectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482836331E1AC62800A7E2EC /* ProjectViewCell.swift */; };
 		48349B1E1D1D78170038CA6D /* MyProjInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48349B1D1D1D78170038CA6D /* MyProjInfo.swift */; };
 		485F5D311D13380D005A6591 /* ProfileStand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F5D301D13380D005A6591 /* ProfileStand.swift */; };
 		485F5D351D1845D6005A6591 /* StartAProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F5D341D1845D6005A6591 /* StartAProject.swift */; };
@@ -62,6 +64,8 @@
 /* Begin PBXFileReference section */
 		48018B1D1D527ED6002BDFB0 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		4808BF841D5A784A004173C1 /* CommentViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewCell.swift; sourceTree = "<group>"; };
+		4828362F1E19AA2400A7E2EC /* ProjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		482836331E1AC62800A7E2EC /* ProjectViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewCell.swift; sourceTree = "<group>"; };
 		48349B1D1D1D78170038CA6D /* MyProjInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProjInfo.swift; sourceTree = "<group>"; };
 		485F5D301D13380D005A6591 /* ProfileStand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileStand.swift; sourceTree = "<group>"; };
 		485F5D341D1845D6005A6591 /* StartAProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartAProject.swift; sourceTree = "<group>"; };
@@ -261,6 +265,8 @@
 				48F2DFB61DC167DB006702B4 /* Member.swift */,
 				486B71CE1DC651140024C0DE /* MembersCell.swift */,
 				48CE7D481DD000AB00D453B2 /* OtherUser.swift */,
+				4828362F1E19AA2400A7E2EC /* ProjectView.swift */,
+				482836331E1AC62800A7E2EC /* ProjectViewCell.swift */,
 			);
 			name = "Universal User";
 			sourceTree = "<group>";
@@ -415,8 +421,10 @@
 				48018B1E1D527ED6002BDFB0 /* CommentCell.swift in Sources */,
 				48CE7D491DD000AB00D453B2 /* OtherUser.swift in Sources */,
 				485F5D311D13380D005A6591 /* ProfileStand.swift in Sources */,
+				482836301E19AA2400A7E2EC /* ProjectView.swift in Sources */,
 				48349B1E1D1D78170038CA6D /* MyProjInfo.swift in Sources */,
 				4860E2851D50289700D46277 /* Comment.swift in Sources */,
+				482836341E1AC62800A7E2EC /* ProjectViewCell.swift in Sources */,
 				4887A5761D0F336B00D5CC42 /* ViewController.swift in Sources */,
 				4887A57A1D0F337600D5CC42 /* JoinAProject.swift in Sources */,
 				485F5D391D1876BC005A6591 /* JoinCell.swift in Sources */,
