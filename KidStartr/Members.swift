@@ -16,7 +16,6 @@ class Members: UITableViewController {
     
     var shouldGoToOtherProfile = false
     
-    //Test
     var userSelectedName = ""
     
     func refresh(_ sender:AnyObject)
