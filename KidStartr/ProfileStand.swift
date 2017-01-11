@@ -95,6 +95,7 @@ class ProfileStand: UIViewController {
             }
         }
         if(shouldGoToProjects){
+            shouldGoToProjects = false
             let viewController: ProjectView = segue.destination as! ProjectView
             
             viewController.Projects = storeProjects

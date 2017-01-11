@@ -38,6 +38,8 @@
 		48888FDF1D11AEC300391864 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 48888FDE1D11AEC300391864 /* libsqlite3.tbd */; };
 		48888FE11D11AECC00391864 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48888FE01D11AECC00391864 /* SystemConfiguration.framework */; };
 		48888FE31D11AEDA00391864 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48888FE21D11AEDA00391864 /* AudioToolbox.framework */; };
+		48A224CE1E24150A009914ED /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A224CD1E24150A009914ED /* DescriptionCell.swift */; };
+		48A224D01E2415FC009914ED /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A224CF1E2415FC009914ED /* Description.swift */; };
 		48CE7D491DD000AB00D453B2 /* OtherUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CE7D481DD000AB00D453B2 /* OtherUser.swift */; };
 		48EFE7691D3C094A00392554 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EFE7681D3C094A00392554 /* InitialViewController.swift */; };
 		48F2DFB51DC1676D006702B4 /* Members.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2DFB41DC1676D006702B4 /* Members.swift */; };
@@ -99,6 +101,8 @@
 		48888FDE1D11AEC300391864 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		48888FE01D11AECC00391864 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		48888FE21D11AEDA00391864 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		48A224CD1E24150A009914ED /* DescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
+		48A224CF1E2415FC009914ED /* Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		48CE7D481DD000AB00D453B2 /* OtherUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUser.swift; sourceTree = "<group>"; };
 		48EFE7681D3C094A00392554 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		48F2DFB41DC1676D006702B4 /* Members.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Members.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				4860E2841D50289700D46277 /* Comment.swift */,
 				4860E2861D50F6F400D46277 /* CommentSection.swift */,
 				48018B1D1D527ED6002BDFB0 /* CommentCell.swift */,
+				48A224CD1E24150A009914ED /* DescriptionCell.swift */,
+				48A224CF1E2415FC009914ED /* Description.swift */,
 			);
 			name = MyProjects;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = D7FEYH9PM7;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					4887A5511D0F331F00D5CC42 = {
 						CreatedOnToolsVersion = 7.3;
@@ -412,6 +419,7 @@
 				4887A5741D0F336600D5CC42 /* Projects.swift in Sources */,
 				486B71CF1DC651140024C0DE /* MembersCell.swift in Sources */,
 				4887A5781D0F337100D5CC42 /* MyProjects.swift in Sources */,
+				48A224D01E2415FC009914ED /* Description.swift in Sources */,
 				485F5D3B1D187E20005A6591 /* JoinProjInfo.swift in Sources */,
 				4808BF851D5A784A004173C1 /* CommentViewCell.swift in Sources */,
 				4887A5701D0F335B00D5CC42 /* AppDelegate.swift in Sources */,
@@ -430,6 +438,7 @@
 				485F5D391D1876BC005A6591 /* JoinCell.swift in Sources */,
 				485F5D371D187389005A6591 /* ProjectsCell.swift in Sources */,
 				48F2DFB71DC167DB006702B4 /* Member.swift in Sources */,
+				48A224CE1E24150A009914ED /* DescriptionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +580,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = D7FEYH9PM7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -593,6 +603,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = D7FEYH9PM7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

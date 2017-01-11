@@ -83,6 +83,12 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBAction func descPressed(_ sender: Any) {
         shouldGoToDesc = true
     }
+    @IBAction func goToDescMembers(_ sender: Any) {
+        shouldGoToDesc = true
+    }
+    @IBAction func descPressedMembers(_ sender: Any) {
+        shouldGoToDesc = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -352,6 +358,11 @@ class MyProjInfo: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         else if(shouldGoToDesc){
             shouldGoToDesc = false
+            
+            let viewController: Description = segue.destination as! Description
+            
+            viewController.projectName = holdName
+            viewController.projectDesc = Desc
         }
         else if(!gate && !secondGate){
             let viewController: CommentSection = segue.destination as! CommentSection
