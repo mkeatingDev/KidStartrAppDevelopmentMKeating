@@ -21,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
         
         let configuration = ParseClientConfiguration { (configuration) -> Void in
-            configuration.applicationId = "kidstartridwazzup4487"
-            configuration.clientKey = "nevertellhaha76546"
-           configuration.server = "http://kidstartr2.herokuapp.com/parse"
+            configuration.applicationId = "kidstartrAppId4729"
+            configuration.clientKey = "kidstartrMasterKey675337"
+           configuration.server = "http://kidstartr.herokuapp.com/parse"
         }
         
         Parse.initialize(with: configuration)
@@ -52,7 +52,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
-
